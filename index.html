@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Consumir API</title>
+</head>
+<body>
+    <h1>Indicadores Económicos a través de API</h1>
+    <table id="tabla">
+        <tr>
+            <td>Nombre</td>
+            <td>Valor</td>
+        </tr>
+    </table>
+    <script>
+        fetch('https://mindicador.cl/api')
+            .then(function(response){
+                return response.json();
+               
+            })
+            .then(function(myJson){
+                console.log(myJson);
+                var infoBitcoin = myJson.bitcoin;
+                var infoDolar = myJson.dolar;
+                var tabla = document.getElementById("tabla");
+                tabla.innerHTML += 
+                    `
+                        <tr>
+                            <td>${infoBitcoin.nombre}</td>
+                            <td>${infoBitcoin.valor}</td>
+                        </tr>
+                        <tr>
+                            <td>${infoDolar.nombre}</td>
+                            <td>${infoDolar.valor}</td>
+                        </tr>
+                
+                    `;
+            })
+    </script>
+</body>
+</html>
